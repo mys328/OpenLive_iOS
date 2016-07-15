@@ -86,10 +86,10 @@ private extension VideoViewLayouter {
         
         for view in smallViews {
             container.addSubview(view)
-            let viewWidth = NSLayoutConstraint(item: view, attribute: .Width, relatedBy: .Equal, toItem: nil, attribute: .NotAnAttribute, multiplier: 1, constant: 90)
-            let viewHeight = NSLayoutConstraint(item: view, attribute: .Height, relatedBy: .Equal, toItem: nil, attribute: .NotAnAttribute, multiplier: 1, constant: 160)
+            let viewWidth = NSLayoutConstraint(item: view, attribute: .Width, relatedBy: .Equal, toItem: nil, attribute: .NotAnAttribute, multiplier: 1, constant: 100)
+            let viewHeight = NSLayoutConstraint(item: view, attribute: .Height, relatedBy: .Equal, toItem: nil, attribute: .NotAnAttribute, multiplier: 1, constant: 100)
             
-            let viewTop = NSLayoutConstraint(item: view, attribute: .Top, relatedBy: .Equal, toItem: container, attribute: .Top, multiplier: 1, constant: 20 + itemSpace)
+            let viewTop = NSLayoutConstraint(item: view, attribute: .Top, relatedBy: .Equal, toItem: container, attribute: .Top, multiplier: 1, constant: 60 + itemSpace)
             let viewLeft: NSLayoutConstraint
             if let lastView = lastView {
                 viewLeft = NSLayoutConstraint(item: view, attribute: .Left, relatedBy: .Equal, toItem: lastView, attribute: .Right, multiplier: 1, constant: itemSpace)

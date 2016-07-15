@@ -3,4 +3,4 @@
 //
 
 #import <AgoraRtcEngineKit/AgoraRtcEngineKit.h>
-#import "AgoraYuvEnhancerObjc.h"
+#import <videoprp/AgoraYuvEnhancerObjc.h>

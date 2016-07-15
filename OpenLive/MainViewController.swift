@@ -13,7 +13,7 @@ class MainViewController: UIViewController {
     @IBOutlet weak var roomNameTextField: UITextField!
     @IBOutlet weak var popoverSourceView: UIView!
     
-    private var videoProfile = AgoraRtcVideoProfile._VideoProfile_240P
+    private var videoProfile = AgoraRtcVideoProfile._VideoProfile_360P
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         guard let segueId = segue.identifier else {
@@ -43,10 +43,10 @@ private extension MainViewController {
     func showRoleSelection() {
         let sheet = UIAlertController(title: nil, message: nil, preferredStyle: .ActionSheet)
         let broadcaster = UIAlertAction(title: "Broadcaster", style: .Default) { [weak self] _ in
-            self?.joinWithRole(.ClientRole_Broadcaster)
+            self?.joinWithRole(.ClientRole_Dual_Stream_Broadcaster)
         }
         let audience = UIAlertAction(title: "Audience", style: .Default) { [weak self] _ in
-            self?.joinWithRole(.ClientRole_Audience)
+            self?.joinWithRole(.ClientRole_Dual_Stream_Audience)
         }
         let cancel = UIAlertAction(title: "Cancel", style: .Cancel, handler: nil)
         sheet.addAction(broadcaster)

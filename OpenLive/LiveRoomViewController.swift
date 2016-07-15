@@ -28,7 +28,7 @@ class LiveRoomViewController: UIViewController {
     var rtcEngine: AgoraRtcEngineKit!
     var agoraEnhancer: AgoraYuvEnhancerObjc?
     private var isBroadcaster: Bool {
-        return clientRole == .ClientRole_Broadcaster
+        return clientRole == .ClientRole_Dual_Stream_Broadcaster
     }
     private var isMuted = false {
         didSet {
@@ -98,7 +98,6 @@ private extension LiveRoomViewController {
     func leaveChannel() {
         setIdleTimerActive(true)
         
-        agoraEnhancer?.turnOff()
         rtcEngine.setupLocalVideo(nil)
         rtcEngine.leaveChannel(nil)
         if isBroadcaster {
@@ -109,6 +108,8 @@ private extension LiveRoomViewController {
             session.hostingView.removeFromSuperview()
         }
         videoSessions.removeAll()
+        
+        agoraEnhancer?.turnOff()
         
         delegate?.liveVCNeedClose(self)
     }
@@ -141,11 +142,24 @@ private extension LiveRoomViewController {
     }
     
     func updateInterface() {
-        var displaySession = videoSessions
-        if !isBroadcaster && !displaySession.isEmpty {
-            displaySession.removeFirst()
+        var displaySessions = videoSessions
+        if !isBroadcaster && !displaySessions.isEmpty {
+            displaySessions.removeFirst()
         }
-        viewLayouter.layoutSessions(displaySession, fullSession: fullSession, inContainer: remoteContainerView)
+        viewLayouter.layoutSessions(displaySessions, fullSession: fullSession, inContainer: remoteContainerView)
+        setStreamTypeForSessions(displaySessions, fullSession: fullSession)
+    }
+    
+    func setStreamTypeForSessions(sessions: [VideoSession], fullSession: VideoSession?) {
+        if let fullSession = fullSession {
+            for session in sessions {
+                rtcEngine.setRemoteVideoStream(UInt(session.uid), type: (session == fullSession ? .VideoStream_High : .VideoStream_Low))
+            }
+        } else {
+            for session in sessions {
+                rtcEngine.setRemoteVideoStream(UInt(session.uid), type: .VideoStream_High)
+            }
+        }
     }
     
     func addLocalSession() {
@@ -186,7 +200,6 @@ private extension LiveRoomViewController {
         if isBroadcaster {
             rtcEngine.startPreview()
         }
-        rtcEngine.muteLocalAudioStream(!isBroadcaster)
         
         addLocalSession()
         
@@ -202,8 +215,6 @@ private extension LiveRoomViewController {
         
         if isBroadcaster {
             let enhancer = AgoraYuvEnhancerObjc()
-            enhancer.lighteningFactor = 1.2
-            enhancer.smoothness = 10
             enhancer.turnOn()
             self.agoraEnhancer = enhancer
         }
