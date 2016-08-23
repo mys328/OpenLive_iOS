@@ -16,11 +16,16 @@ class LiveRoomViewController: UIViewController {
     
     @IBOutlet weak var roomNameLabel: UILabel!
     @IBOutlet weak var remoteContainerView: UIView!
+    @IBOutlet weak var broadcastButton: UIButton!
     @IBOutlet var sessionButtons: [UIButton]!
     @IBOutlet weak var audioMuteButton: UIButton!
     
     var roomName: String!
-    var clientRole = AgoraRtcClientRole.ClientRole_Dual_Stream_Audience
+    var clientRole = AgoraRtcClientRole.ClientRole_Dual_Stream_Audience {
+        didSet {
+            updateButtonsVisiablity()
+        }
+    }
     var videoProfile: AgoraRtcVideoProfile!
     weak var delegate: LiveRoomVCDelegate?
     
@@ -59,12 +64,7 @@ class LiveRoomViewController: UIViewController {
         super.viewDidLoad()
         
         roomNameLabel.text = roomName
-        
-        if !isBroadcaster {
-            for button in sessionButtons {
-                button.hidden = true
-            }
-        }
+        updateButtonsVisiablity()
         
         loadAgoraKit()
     }
@@ -76,6 +76,17 @@ class LiveRoomViewController: UIViewController {
     
     @IBAction func doMutePressed(sender: UIButton) {
         isMuted = !isMuted
+    }
+    
+    @IBAction func doBroadcastPressed(sender: UIButton) {
+        if isBroadcaster {
+            clientRole = .ClientRole_Dual_Stream_Audience
+        } else {
+            clientRole = .ClientRole_Dual_Stream_Broadcaster
+        }
+        
+        rtcEngine.setClientRole(clientRole)
+        updateInterfaceWithAnimation(true)
     }
     
     @IBAction func doDoubleTapped(sender: UITapGestureRecognizer) {
@@ -95,6 +106,18 @@ class LiveRoomViewController: UIViewController {
 }
 
 private extension LiveRoomViewController {
+    func updateButtonsVisiablity() {
+        guard let sessionButtons = sessionButtons else {
+            return
+        }
+        
+        broadcastButton?.setImage(UIImage(named: isBroadcaster ? "btn_join_cancel" : "btn_join"), forState: .Normal)
+        
+        for button in sessionButtons {
+            button.hidden = !isBroadcaster
+        }
+    }
+    
     func leaveChannel() {
         setIdleTimerActive(true)
         

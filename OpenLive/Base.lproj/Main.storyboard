@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="ypF-Of-0Eu">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="ypF-Of-0Eu">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -302,8 +302,19 @@
                                     <action selector="doLeavePressed:" destination="jcF-oR-gRA" eventType="touchUpInside" id="fWN-To-qBB"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tjS-OE-tLx">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AUS-G6-i97">
                                 <rect key="frame" x="0.0" y="546" width="54" height="54"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="54" id="pEa-Xm-qqP"/>
+                                    <constraint firstAttribute="width" constant="54" id="ubF-f3-YeG"/>
+                                </constraints>
+                                <state key="normal" image="btn_join"/>
+                                <connections>
+                                    <action selector="doBroadcastPressed:" destination="jcF-oR-gRA" eventType="touchUpInside" id="1Ep-Df-wd9"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tjS-OE-tLx">
+                                <rect key="frame" x="54" y="546" width="54" height="54"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="54" id="2fF-sg-lSK"/>
                                     <constraint firstAttribute="height" constant="54" id="uuJ-Zr-A7D"/>
@@ -314,7 +325,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jtZ-41-ZXH">
-                                <rect key="frame" x="54" y="546" width="54" height="54"/>
+                                <rect key="frame" x="108" y="546" width="54" height="54"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="54" id="1fh-3W-Zuy"/>
                                     <constraint firstAttribute="width" constant="54" id="Jc0-n4-hB6"/>
@@ -339,21 +350,24 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="jtZ-41-ZXH" firstAttribute="leading" secondItem="tjS-OE-tLx" secondAttribute="trailing" id="AQd-au-LQq"/>
+                            <constraint firstItem="AUS-G6-i97" firstAttribute="leading" secondItem="uD4-xu-7ax" secondAttribute="leading" id="HsA-jE-gBk"/>
                             <constraint firstAttribute="bottom" secondItem="tjS-OE-tLx" secondAttribute="bottom" id="IM6-Vq-fL2"/>
                             <constraint firstAttribute="trailing" secondItem="dMj-UW-Quu" secondAttribute="trailing" id="R3c-3r-VCN"/>
                             <constraint firstAttribute="bottom" secondItem="Ca0-av-PZ7" secondAttribute="bottom" id="R6u-fi-SyQ"/>
                             <constraint firstItem="Ca0-av-PZ7" firstAttribute="top" secondItem="uD4-xu-7ax" secondAttribute="top" id="Yqw-HO-boS"/>
                             <constraint firstItem="hfg-XL-B7H" firstAttribute="centerX" secondItem="uD4-xu-7ax" secondAttribute="centerX" id="aPG-P1-1F2"/>
+                            <constraint firstItem="tjS-OE-tLx" firstAttribute="leading" secondItem="AUS-G6-i97" secondAttribute="trailing" id="asV-6H-jOY"/>
                             <constraint firstItem="hfg-XL-B7H" firstAttribute="top" secondItem="uD4-xu-7ax" secondAttribute="top" constant="20" id="bZw-Zv-Hvr"/>
                             <constraint firstItem="dMj-UW-Quu" firstAttribute="top" secondItem="uD4-xu-7ax" secondAttribute="top" constant="20" id="eIg-nr-qRi"/>
                             <constraint firstAttribute="bottom" secondItem="jtZ-41-ZXH" secondAttribute="bottom" id="fG4-7y-lnk"/>
+                            <constraint firstAttribute="bottom" secondItem="AUS-G6-i97" secondAttribute="bottom" id="gII-9r-wla"/>
                             <constraint firstAttribute="trailing" secondItem="Ca0-av-PZ7" secondAttribute="trailing" id="jdA-sH-4hP"/>
                             <constraint firstItem="Ca0-av-PZ7" firstAttribute="leading" secondItem="uD4-xu-7ax" secondAttribute="leading" id="o22-Pm-Dq6"/>
-                            <constraint firstItem="tjS-OE-tLx" firstAttribute="leading" secondItem="uD4-xu-7ax" secondAttribute="leading" id="w8m-le-keG"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="audioMuteButton" destination="jtZ-41-ZXH" id="NcN-5X-mhe"/>
+                        <outlet property="broadcastButton" destination="AUS-G6-i97" id="arb-yX-bus"/>
                         <outlet property="remoteContainerView" destination="Ca0-av-PZ7" id="au8-IP-tNc"/>
                         <outlet property="roomNameLabel" destination="hfg-XL-B7H" id="qHt-X0-M31"/>
                         <outletCollection property="sessionButtons" destination="tjS-OE-tLx" collectionClass="NSMutableArray" id="xcY-7E-98c"/>
@@ -391,6 +405,7 @@
     </scenes>
     <resources>
         <image name="btn_close" width="30" height="30"/>
+        <image name="btn_join" width="40" height="40"/>
         <image name="btn_mute" width="40" height="40"/>
         <image name="btn_overturn" width="40" height="40"/>
         <image name="btn_setting" width="23" height="23"/>
