@@ -215,7 +215,7 @@ private extension LiveRoomViewController {
 //MARK: - Agora Media SDK
 private extension LiveRoomViewController {
     func loadAgoraKit() {
-        rtcEngine = AgoraRtcEngineKit.sharedEngineWithVendorKey(VendorKey, applicationCategory: .ApplicationCategory_LiveBroadcasting, delegate: self)
+        rtcEngine = AgoraRtcEngineKit.sharedEngineWithVendorKey(KeyCenter.AppId, applicationCategory: .ApplicationCategory_LiveBroadcasting, delegate: self)
         rtcEngine.enableVideo()
         rtcEngine.setVideoProfile(videoProfile)
         rtcEngine.setClientRole(clientRole)

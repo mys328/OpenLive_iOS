@@ -72,7 +72,7 @@ NOTICE: before building, you need to
 	you can get your vendor key at https://dashboard.agora.io
 
 
-2. update libraries at OpenLive/Libs
+2. update libraries at OpenLive/libs
 
 
 Enjoy video broadcasting!

@@ -6,4 +6,6 @@
 //  Copyright © 2016 Agora. All rights reserved.
 //
 
-let VendorKey = <#Your Vendor Key#>
+struct KeyCenter {
+    static let AppId: String = <#Your App Id#>
+}

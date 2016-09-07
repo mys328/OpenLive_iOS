@@ -8,8 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		07130E8A1D22928200CC85D8 /* KeyCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07130E891D22928200CC85D8 /* KeyCenter.swift */; };
-		0720B44C1D38FF3400863AB2 /* videoprp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0720B44B1D38FF3400863AB2 /* videoprp.framework */; };
-		0720B44E1D38FF4500863AB2 /* AgoraRtcEngineKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0720B44D1D38FF4500863AB2 /* AgoraRtcEngineKit.framework */; };
+		073177DE1D8000A40062A68C /* AgoraRtcEngineKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 073177DC1D8000A40062A68C /* AgoraRtcEngineKit.framework */; };
+		073177DF1D8000A40062A68C /* videoprp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 073177DD1D8000A40062A68C /* videoprp.framework */; };
 		078012ED1D1E57730093DE24 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 078012EC1D1E57730093DE24 /* AppDelegate.swift */; };
 		078012EF1D1E57730093DE24 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 078012EE1D1E57730093DE24 /* MainViewController.swift */; };
 		078012F21D1E57730093DE24 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 078012F01D1E57730093DE24 /* Main.storyboard */; };
@@ -32,8 +32,8 @@
 
 /* Begin PBXFileReference section */
 		07130E891D22928200CC85D8 /* KeyCenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyCenter.swift; sourceTree = "<group>"; };
-		0720B44B1D38FF3400863AB2 /* videoprp.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = videoprp.framework; sourceTree = "<group>"; };
-		0720B44D1D38FF4500863AB2 /* AgoraRtcEngineKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AgoraRtcEngineKit.framework; sourceTree = "<group>"; };
+		073177DC1D8000A40062A68C /* AgoraRtcEngineKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AgoraRtcEngineKit.framework; sourceTree = "<group>"; };
+		073177DD1D8000A40062A68C /* videoprp.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = videoprp.framework; sourceTree = "<group>"; };
 		078012E91D1E57730093DE24 /* OpenLive.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OpenLive.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		078012EC1D1E57730093DE24 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		078012EE1D1E57730093DE24 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
@@ -62,29 +62,30 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				073177DE1D8000A40062A68C /* AgoraRtcEngineKit.framework in Frameworks */,
 				0790F1641D1EBE24003F8C18 /* libc++.tbd in Frameworks */,
 				0790F1241D1E63DD003F8C18 /* SystemConfiguration.framework in Frameworks */,
-				0720B44E1D38FF4500863AB2 /* AgoraRtcEngineKit.framework in Frameworks */,
 				0790F1221D1E63A8003F8C18 /* CoreTelephony.framework in Frameworks */,
 				0790F1201D1E63A2003F8C18 /* VideoToolbox.framework in Frameworks */,
 				0790F11E1D1E639D003F8C18 /* AudioToolbox.framework in Frameworks */,
 				0790F1181D1E6332003F8C18 /* CoreMotion.framework in Frameworks */,
 				0790F1161D1E632D003F8C18 /* CoreMedia.framework in Frameworks */,
 				0790F1141D1E6325003F8C18 /* AVFoundation.framework in Frameworks */,
-				0720B44C1D38FF3400863AB2 /* videoprp.framework in Frameworks */,
+				073177DF1D8000A40062A68C /* videoprp.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		07130E901D22970800CC85D8 /* Libs */ = {
+		073177DB1D8000A40062A68C /* libs */ = {
 			isa = PBXGroup;
 			children = (
-				0720B44D1D38FF4500863AB2 /* AgoraRtcEngineKit.framework */,
-				0720B44B1D38FF3400863AB2 /* videoprp.framework */,
+				073177DC1D8000A40062A68C /* AgoraRtcEngineKit.framework */,
+				073177DD1D8000A40062A68C /* videoprp.framework */,
 			);
-			path = Libs;
+			path = libs;
+			name = libs;
 			sourceTree = "<group>";
 		};
 		078012E01D1E57730093DE24 = {
@@ -114,7 +115,7 @@
 				0790F1501D1E9631003F8C18 /* VideoSession.swift */,
 				0790F1521D1E9781003F8C18 /* VideoViewLayouter.swift */,
 				0790F1681D1EEAB2003F8C18 /* ProfileCell.swift */,
-				07130E901D22970800CC85D8 /* Libs */,
+				073177DB1D8000A40062A68C /* libs */,
 				0790F1191D1E633C003F8C18 /* Frameworks */,
 				078012EC1D1E57730093DE24 /* AppDelegate.swift */,
 				078012F31D1E57730093DE24 /* Assets.xcassets */,
@@ -342,7 +343,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/OpenLive/Libs",
+					"$(PROJECT_DIR)/OpenLive/libs",
 				);
 				INFOPLIST_FILE = OpenLive/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
@@ -364,7 +365,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/OpenLive/Libs",
+					"$(PROJECT_DIR)/OpenLive/libs",
 				);
 				INFOPLIST_FILE = OpenLive/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
