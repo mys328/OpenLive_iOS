@@ -16,13 +16,13 @@ class VideoSession: NSObject {
     init(uid: Int64) {
         self.uid = uid
         
-        hostingView = UIView(frame: CGRectMake(0, 0, 100, 100))
+        hostingView = UIView(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
         hostingView.translatesAutoresizingMaskIntoConstraints = false
         
         canvas = AgoraRtcVideoCanvas()
         canvas.uid = UInt(uid)
         canvas.view = hostingView
-        canvas.renderMode = .Render_Hidden
+        canvas.renderMode = .render_Hidden
     }
 }
 

@@ -13,23 +13,23 @@ class MainViewController: UIViewController {
     @IBOutlet weak var roomNameTextField: UITextField!
     @IBOutlet weak var popoverSourceView: UIView!
     
-    private var videoProfile = AgoraRtcVideoProfile._VideoProfile_360P
+    fileprivate var videoProfile = AgoraRtcVideoProfile._VideoProfile_360P
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         guard let segueId = segue.identifier else {
             return
         }
         
         switch segueId {
         case "mainToSettings":
-            let settingsVC = segue.destinationViewController as! SettingsViewController
+            let settingsVC = segue.destination as! SettingsViewController
             settingsVC.videoProfile = videoProfile
             settingsVC.delegate = self
         case "mainToLive":
-            let liveVC = segue.destinationViewController as! LiveRoomViewController
+            let liveVC = segue.destination as! LiveRoomViewController
             liveVC.roomName = roomNameTextField.text!
             liveVC.videoProfile = videoProfile
-            if let value = sender as? NSNumber, let role = AgoraRtcClientRole(rawValue: value.integerValue) {
+            if let value = sender as? NSNumber, let role = AgoraRtcClientRole(rawValue: value.intValue) {
                 liveVC.clientRole = role
             }
             liveVC.delegate = self
@@ -41,45 +41,45 @@ class MainViewController: UIViewController {
 
 private extension MainViewController {
     func showRoleSelection() {
-        let sheet = UIAlertController(title: nil, message: nil, preferredStyle: .ActionSheet)
-        let broadcaster = UIAlertAction(title: "Broadcaster", style: .Default) { [weak self] _ in
-            self?.joinWithRole(.ClientRole_Dual_Stream_Broadcaster)
+        let sheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        let broadcaster = UIAlertAction(title: "Broadcaster", style: .default) { [weak self] _ in
+            self?.join(withRole: .clientRole_Dual_Stream_Broadcaster)
         }
-        let audience = UIAlertAction(title: "Audience", style: .Default) { [weak self] _ in
-            self?.joinWithRole(.ClientRole_Dual_Stream_Audience)
+        let audience = UIAlertAction(title: "Audience", style: .default) { [weak self] _ in
+            self?.join(withRole: .clientRole_Dual_Stream_Audience)
         }
-        let cancel = UIAlertAction(title: "Cancel", style: .Cancel, handler: nil)
+        let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
         sheet.addAction(broadcaster)
         sheet.addAction(audience)
         sheet.addAction(cancel)
         sheet.popoverPresentationController?.sourceView = popoverSourceView
-        sheet.popoverPresentationController?.permittedArrowDirections = .Up
-        presentViewController(sheet, animated: true, completion: nil)
+        sheet.popoverPresentationController?.permittedArrowDirections = .up
+        present(sheet, animated: true, completion: nil)
     }
 }
 
 private extension MainViewController {
-    func joinWithRole(role: AgoraRtcClientRole) {
-        performSegueWithIdentifier("mainToLive", sender: NSNumber(integer: role.rawValue))
+    func join(withRole role: AgoraRtcClientRole) {
+        performSegue(withIdentifier: "mainToLive", sender: NSNumber(value: role.rawValue as Int))
     }
 }
 
 extension MainViewController: SettingsVCDelegate {
-    func settingsVC(settingsVC: SettingsViewController, didSelectProfile profile: AgoraRtcVideoProfile) {
+    func settingsVC(_ settingsVC: SettingsViewController, didSelectProfile profile: AgoraRtcVideoProfile) {
         videoProfile = profile
-        dismissViewControllerAnimated(true, completion: nil)
+        dismiss(animated: true, completion: nil)
     }
 }
 
 extension MainViewController: LiveRoomVCDelegate {
-    func liveVCNeedClose(liveVC: LiveRoomViewController) {
-        navigationController?.popViewControllerAnimated(true)
+    func liveVCNeedClose(_ liveVC: LiveRoomViewController) {
+        navigationController?.popViewController(animated: true)
     }
 }
 
 extension MainViewController: UITextFieldDelegate {
-    func textFieldShouldReturn(textField: UITextField) -> Bool {
-        if let string = textField.text where !string.isEmpty {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        if let string = textField.text , !string.isEmpty {
             showRoleSelection()
         }
         
