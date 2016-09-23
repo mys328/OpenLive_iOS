@@ -91,8 +91,7 @@ class LiveRoomViewController: UIViewController {
     
     @IBAction func doDoubleTapped(_ sender: UITapGestureRecognizer) {
         if fullSession == nil {
-            //将双击到的session全屏
-            if let tappedSession = viewLayouter.reponseSessionOfGesture(sender, inSessions: videoSessions, inContainerView: remoteContainerView) {
+            if let tappedSession = viewLayouter.responseSession(of: sender, inSessions: videoSessions, inContainerView: remoteContainerView) {
                 fullSession = tappedSession
             }
         } else {
@@ -169,7 +168,7 @@ private extension LiveRoomViewController {
         if !isBroadcaster && !displaySessions.isEmpty {
             displaySessions.removeFirst()
         }
-        viewLayouter.layoutSessions(displaySessions, fullSession: fullSession, inContainer: remoteContainerView)
+        viewLayouter.layout(sessions: displaySessions, fullSession: fullSession, inContainer: remoteContainerView)
         setStreamType(forSessions: displaySessions, fullSession: fullSession)
     }
     

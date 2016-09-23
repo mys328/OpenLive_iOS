@@ -12,7 +12,7 @@ class VideoViewLayouter {
     
     fileprivate var layoutConstraints = [NSLayoutConstraint]()
     
-    func layoutSessions(_ sessions: [VideoSession], fullSession: VideoSession?, inContainer container: UIView) {
+    func layout(sessions: [VideoSession], fullSession: VideoSession?, inContainer container: UIView) {
         
         guard !sessions.isEmpty else {
             return
@@ -27,10 +27,10 @@ class VideoViewLayouter {
         
         if let fullSession = fullSession {
             layoutConstraints.append(contentsOf: layoutFullScreenView(fullSession.hostingView, inContainerView: container))
-            let smallViews = viewListFromSessions(sessions, maxCount: 3, ignorSession: fullSession)
+            let smallViews = viewList(from: sessions, maxCount: 3, ignorSession: fullSession)
             layoutConstraints.append(contentsOf: layoutSmallViews(smallViews, inContainerView: container))
         } else {
-            let allViews = viewListFromSessions(sessions, maxCount: 4, ignorSession: nil)
+            let allViews = viewList(from: sessions, maxCount: 4, ignorSession: nil)
             layoutConstraints.append(contentsOf: layoutGridViews(allViews, inContainerView: container))
         }
         
@@ -39,7 +39,7 @@ class VideoViewLayouter {
         }
     }
     
-    func reponseSessionOfGesture(_ gesture: UIGestureRecognizer, inSessions sessions: [VideoSession], inContainerView container: UIView) -> VideoSession? {
+    func responseSession(of gesture: UIGestureRecognizer, inSessions sessions: [VideoSession], inContainerView container: UIView) -> VideoSession? {
         let location = gesture.location(in: container)
         for session in sessions {
             if let view = session.hostingView , view.frame.contains(location) {
@@ -52,7 +52,7 @@ class VideoViewLayouter {
 
 //MARK: - layouts
 private extension VideoViewLayouter {
-    func viewListFromSessions(_ sessions: [VideoSession], maxCount: Int, ignorSession: VideoSession?) -> [UIView] {
+    func viewList(from sessions: [VideoSession], maxCount: Int, ignorSession: VideoSession?) -> [UIView] {
         var views = [UIView]()
         for session in sessions {
             if session == ignorSession {
