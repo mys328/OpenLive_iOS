@@ -43,10 +43,10 @@ private extension MainViewController {
     func showRoleSelection() {
         let sheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         let broadcaster = UIAlertAction(title: "Broadcaster", style: .default) { [weak self] _ in
-            self?.join(withRole: .clientRole_Dual_Stream_Broadcaster)
+            self?.join(withRole: .clientRole_Broadcaster)
         }
         let audience = UIAlertAction(title: "Audience", style: .default) { [weak self] _ in
-            self?.join(withRole: .clientRole_Dual_Stream_Audience)
+            self?.join(withRole: .clientRole_Audience)
         }
         let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
         sheet.addAction(broadcaster)

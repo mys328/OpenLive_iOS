@@ -21,7 +21,7 @@ class LiveRoomViewController: UIViewController {
     @IBOutlet weak var audioMuteButton: UIButton!
     
     var roomName: String!
-    var clientRole = AgoraRtcClientRole.clientRole_Dual_Stream_Audience {
+    var clientRole = AgoraRtcClientRole.clientRole_Audience {
         didSet {
             updateButtonsVisiablity()
         }
@@ -33,7 +33,7 @@ class LiveRoomViewController: UIViewController {
     var rtcEngine: AgoraRtcEngineKit!
     var agoraEnhancer: AgoraYuvEnhancerObjc?
     fileprivate var isBroadcaster: Bool {
-        return clientRole == .clientRole_Dual_Stream_Broadcaster
+        return clientRole == .clientRole_Broadcaster
     }
     fileprivate var isMuted = false {
         didSet {
@@ -80,9 +80,9 @@ class LiveRoomViewController: UIViewController {
     
     @IBAction func doBroadcastPressed(_ sender: UIButton) {
         if isBroadcaster {
-            clientRole = .clientRole_Dual_Stream_Audience
+            clientRole = .clientRole_Audience
         } else {
-            clientRole = .clientRole_Dual_Stream_Broadcaster
+            clientRole = .clientRole_Broadcaster
         }
         
         rtcEngine.setClientRole(clientRole)
@@ -214,9 +214,11 @@ private extension LiveRoomViewController {
 //MARK: - Agora Media SDK
 private extension LiveRoomViewController {
     func loadAgoraKit() {
-        rtcEngine = AgoraRtcEngineKit.sharedEngine(withVendorKey: KeyCenter.AppId, applicationCategory: .applicationCategory_LiveBroadcasting, delegate: self)
+        rtcEngine = AgoraRtcEngineKit.sharedEngine(withAppId: KeyCenter.AppId, delegate: self)
+        rtcEngine.setChannelProfile(.channelProfile_LiveBroadcasting)
+        rtcEngine.enableDualStreamMode(true)
         rtcEngine.enableVideo()
-        rtcEngine.setVideoProfile(videoProfile)
+        rtcEngine.setVideoProfile(videoProfile, swapWidthAndHeight: false)
         rtcEngine.setClientRole(clientRole)
         
         if isBroadcaster {
