@@ -239,6 +239,8 @@ private extension LiveRoomViewController {
         
         if isBroadcaster {
             let enhancer = AgoraYuvEnhancerObjc()
+            enhancer.lighteningFactor = 0.7
+            enhancer.smoothness = 0.5
             enhancer.turnOn()
             self.agoraEnhancer = enhancer
         }

@@ -72,7 +72,9 @@ NOTICE: before building, you need to
 	you can get your vendor key at https://dashboard.agora.io
 
 
-2. update libraries at OpenLive/libs
+2. update AgoraRtcEngineKit.framework at OpenLive/libs
+
+3. update videoprp.framework at OpenLive
 
 
 Enjoy video broadcasting!
