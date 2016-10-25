@@ -27,7 +27,7 @@ This demo is featuring live interactive broadcasting with the following unique f
 3. Switch video stream free with different screen UI.
 4. Globally broadcasting.
 
-This demo shall be working only with [Agora.io](http://www.agora.io) interactive broadcasting SDK. Currently, the SDK is under invitation only testing. Please contact <mailto:sales@agora.io>. Developers from China can call 400 632 6626.
+This demo shall be working only with [Agora.io](http://www.agora.io) interactive broadcasting SDK. Please contact <mailto:sales@agora.io>. Developers from China can call 400 632 6626.
 
 这个Demo模拟的是一个有多人主播同时对话，并且对观众直播的App。主要有4个独特之处：
 
@@ -36,7 +36,7 @@ This demo shall be working only with [Agora.io](http://www.agora.io) interactive
 3. 支持大小流切换，观众在多视窗观看时，可选择任意主播放大主屏观看；
 4. 支持全球范围的直播，跨国跨洲直播
 
-该Demo需要基于[声网Agora.io](http://cn.agora.io)的实时互动直播技术才能运行。现SDK正在邀请内测中。如有需求，请联系<mailto:sales@agora.io>。中国用户可直接拨打400 632 6626。
+该Demo需要基于[声网Agora.io](http://cn.agora.io)的实时互动直播技术才能运行。如有需求，请联系<mailto:sales@agora.io>。中国用户可直接拨打400 632 6626。
 
 ##Agora.io Interactive Broadcasting
 
