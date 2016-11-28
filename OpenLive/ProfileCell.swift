@@ -41,12 +41,12 @@ private extension AgoraRtcVideoProfile {
     
     func bitRate() -> String? {
         switch self {
-        case ._VideoProfile_120P: return "80"
-        case ._VideoProfile_180P: return "160"
+        case ._VideoProfile_120P: return "65"
+        case ._VideoProfile_180P: return "140"
         case ._VideoProfile_240P: return "200"
         case ._VideoProfile_360P: return "400"
         case ._VideoProfile_480P: return "500"
-        case ._VideoProfile_720P: return "1000"
+        case ._VideoProfile_720P: return "1130"
         default: return nil
         }
     }
