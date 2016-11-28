@@ -19,10 +19,14 @@ class LiveRoomViewController: UIViewController {
     @IBOutlet weak var broadcastButton: UIButton!
     @IBOutlet var sessionButtons: [UIButton]!
     @IBOutlet weak var audioMuteButton: UIButton!
+    @IBOutlet weak var enhancerButton: UIButton!
     
     var roomName: String!
     var clientRole = AgoraRtcClientRole.clientRole_Audience {
         didSet {
+            if isBroadcaster {
+                shouldEnhancer = true
+            }
             updateButtonsVisiablity()
         }
     }
@@ -31,14 +35,29 @@ class LiveRoomViewController: UIViewController {
     
     //MARK: - engine & session view
     var rtcEngine: AgoraRtcEngineKit!
-    var agoraEnhancer: AgoraYuvEnhancerObjc?
+    fileprivate lazy var agoraEnhancer: AgoraYuvEnhancerObjc? = {
+        let enhancer = AgoraYuvEnhancerObjc()
+        enhancer.lighteningFactor = 0.7
+        enhancer.smoothness = 0.7
+        return enhancer
+    }()
     fileprivate var isBroadcaster: Bool {
         return clientRole == .clientRole_Broadcaster
     }
     fileprivate var isMuted = false {
         didSet {
             rtcEngine?.muteLocalAudioStream(isMuted)
-            audioMuteButton?.setImage(UIImage(named: isMuted ? "btn_mute_cancel" : "btn_mute"), for: UIControlState())
+            audioMuteButton?.setImage(UIImage(named: isMuted ? "btn_mute_cancel" : "btn_mute"), for: .normal)
+        }
+    }
+    fileprivate var shouldEnhancer = true {
+        didSet {
+            if shouldEnhancer {
+                agoraEnhancer?.turnOn()
+            } else {
+                agoraEnhancer?.turnOff()
+            }
+            enhancerButton?.setImage(UIImage(named: shouldEnhancer ? "btn_beautiful_cancel" : "btn_beautiful"), for: .normal)
         }
     }
     
@@ -78,9 +97,16 @@ class LiveRoomViewController: UIViewController {
         isMuted = !isMuted
     }
     
+    @IBAction func doEnhancerPressed(_ sender: UIButton) {
+        shouldEnhancer = !shouldEnhancer
+    }
+    
     @IBAction func doBroadcastPressed(_ sender: UIButton) {
         if isBroadcaster {
             clientRole = .clientRole_Audience
+            if fullSession?.uid == 0 {
+                fullSession = nil
+            }
         } else {
             clientRole = .clientRole_Broadcaster
         }
@@ -238,11 +264,7 @@ private extension LiveRoomViewController {
         }
         
         if isBroadcaster {
-            let enhancer = AgoraYuvEnhancerObjc()
-            enhancer.lighteningFactor = 0.7
-            enhancer.smoothness = 0.5
-            enhancer.turnOn()
-            self.agoraEnhancer = enhancer
+            shouldEnhancer = true
         }
     }
 }

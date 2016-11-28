@@ -73,7 +73,7 @@ extension MainViewController: SettingsVCDelegate {
 
 extension MainViewController: LiveRoomVCDelegate {
     func liveVCNeedClose(_ liveVC: LiveRoomViewController) {
-        navigationController?.popViewController(animated: true)
+        let _ = navigationController?.popViewController(animated: true)
     }
 }
 
